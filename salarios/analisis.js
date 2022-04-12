@@ -1,18 +1,4 @@
-//
-
-const salariosCol = colombia.map(
-	(persona)=>{
-		return persona.salary;
-	}
-);
-
-let personaMitad=0;
-//ordeno de menor a mayor...
-const salariosColSorted = salariosCol.sort(
-	(salaryA,salaryB)=>{
-		salaryA - salaryB;
-	}
-);
+//Helpers:
 
 //Funcion es par
 const esPar = (numero)=>{
@@ -30,7 +16,6 @@ let calcularMedia = (lista)=>{
 	const promedioLista = sumaLista/lista.length;
 	return promedioLista;
 }
-
 //Calcular la mediana de salarios
 let medianaSalarios =(lista)=>{
 	let mitad = parseInt(lista.length/2);
@@ -46,6 +31,36 @@ let medianaSalarios =(lista)=>{
 	return personaMitad;
 }
 
+//--Mediana General
+const salariosCol = colombia.map(
+	(persona)=>{
+		return persona.salary;
+	}
+);
+
+let personaMitad=0;
+//ordeno de menor a mayor...
+const salariosColSorted = salariosCol.sort(
+	(salaryA,salaryB)=>{
+		salaryA - salaryB;
+	}
+);
+
+//Mediana del top 10%
+const spliceStart = (salariosColSorted.length*90)/100;//Del 90% en adelante
+const spliceCount = salariosColSorted.length-spliceStart;//desde el 90% al final ejem 100%-90%=10%
+//Splice: donde queremos hacer el corte,cuantas partes queremos que saque
+const salariosColTop10 = salariosColSorted.splice(spliceStart, spliceCount);
+
+ 
 const medianaSalariosValor = medianaSalarios(salariosColSorted);
+const medianaGeneralCol = medianaSalarios(salariosColSorted);
+const medianaTop10Col = medianaSalarios(salariosColTop10);
+
 console.log(salariosColSorted);
 console.log(medianaSalariosValor);
+//console.log un objeto:
+console.log({
+	medianaGeneralCol,
+	medianaTop10Col,
+})
